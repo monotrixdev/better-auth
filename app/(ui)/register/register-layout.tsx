@@ -22,6 +22,8 @@ import { ifError } from 'assert';
 import { edgeServerPages } from 'next/dist/build/webpack/plugins/pages-manifest-plugin';
 import { keepMount } from 'better-auth/client';
 import { inherits } from 'util';
+import { signUp } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const RegisterLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(false);
@@ -39,6 +41,8 @@ const RegisterLayout = () => {
         password: '',
         confirmPassword: ""
     })
+
+    const router = useRouter();
 
     const trimPassword = password.toString().trim();
     const confirmTrimPassword = confirmPassword.toString().trim();
@@ -93,7 +97,22 @@ const RegisterLayout = () => {
         e.preventDefault();
         checkInputs();
         setIsLoading(true);
-        setTimeout(() => setIsLoading(false), 3000)
+        try {
+           const res = await signUp.email({
+                name,
+                email,
+                password
+            });
+            if (res.error) {
+                alert(res.error.message);
+            } else {
+                router.push("/dashboard");
+            }
+        } catch (err) {
+            console.log(`Error detected: ${err}`)
+        } finally {
+            setIsLoading(false);
+        }
       
 
     }
