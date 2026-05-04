@@ -1,18 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import { clearInterval } from 'timers';
-
 
 type CounterProps = {
     end: number;
     duration?: number;
     sufix?: any
 }
-const Counter = ({ end , duration=2000, sufix= ''}: CounterProps) => {
+
+const Counter = ({ end, duration = 2000, sufix = '' }: CounterProps) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-      try {
         if (end <= 0) return;
         let current = 0;
         const steps = Math.max(1, Math.floor(duration / 16));
@@ -22,26 +20,18 @@ const Counter = ({ end , duration=2000, sufix= ''}: CounterProps) => {
             current = Math.min(current + stepValue, end);
             setCount(Math.floor(current));
             if (current >= end) {
-              clearInterval(timer)
-              timer.close();
+                clearInterval(timer);
             }
         }, 16);
 
         return () => clearInterval(timer);
-      } catch (err) {
-        console.log(err)
-      }
+    }, [end, duration]);
 
-      
-
-    }, [end, duration])
-
-    
-  return (
-    <div>
-      {count.toLocaleString()}{sufix}
-    </div>
-  )
+    return (
+        <div>
+            {count.toLocaleString()}{sufix}
+        </div>
+    );
 }
 
-export default Counter
+export default Counter;

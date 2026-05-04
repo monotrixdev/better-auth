@@ -100,9 +100,7 @@ const PricigPage = () => {
               </div>
               <div className={cn('mt-5 p-[1px]',
               item.featured && 'bg-gradient-to-br from-purple-200 via-purple-300 to-purple-200 rounded-lg')}>
-                <Button size='lg' variant={cn(
-                  "default"
-                )} className={cn(
+                <Button size='lg' variant="default" className={cn(
                   'w-full px-4 py-5',
                   item.featured && "bg-gradient-to-br from-purple-300 via-purple-600 to-purple-700 text-white",
                   !item.featured && "bg-gradient-to-br from-zinc-600 via-zinc-700 to-zinc-800"
