@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../../_components/spinner';
 import Link from 'next/link';
 import { setLazyProp } from 'next/dist/server/api-utils';
+import { signIn } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const LoginLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(true);
@@ -40,19 +42,25 @@ const LoginLayout = () => {
         setHasError(false);
     }
 
+    const router = useRouter();
+
 
     const handleSubmitForm = async (e: any) => {
         e.preventDefault();
         checkValid();
         setIsLoading(true);
         try {
-           const res = await fetch(`/api/login/`, {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify({ email, password})
-           })
-            const data = await res.json();
-            console.log(data);
+           
+            const res = await signIn.email({
+                email,
+                password
+            });
+            if (res.error) {
+                alert(res.error.message || "Sign in failed");
+            } else {
+                router.push("/dashboard");
+            }
+
             
         } catch (error) {
             console.log(error);

@@ -12,6 +12,7 @@ const Counter = ({ end , duration=2000, sufix= ''}: CounterProps) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
+      try {
         if (end <= 0) return;
         let current = 0;
         const steps = Math.max(1, Math.floor(duration / 16));
@@ -20,10 +21,18 @@ const Counter = ({ end , duration=2000, sufix= ''}: CounterProps) => {
         const timer = setInterval(() => {
             current = Math.min(current + stepValue, end);
             setCount(Math.floor(current));
-            if (current >= end) clearInterval(timer);
+            if (current >= end) {
+              clearInterval(timer)
+              timer.close();
+            }
         }, 16);
 
         return () => clearInterval(timer);
+      } catch (err) {
+        console.log(err)
+      }
+
+      
 
     }, [end, duration])
 
