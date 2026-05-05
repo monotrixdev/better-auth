@@ -3,7 +3,7 @@ import Spinner from '@/app/_components/spinner'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader } from '@/components/ui/card'
 import { authClient } from '@/lib/auth-client'
-import { file } from 'better-auth'
+import { any, file } from 'better-auth'
 import { CheckCircle2, LayoutDashboardIcon, PlusCircle, SaveAll, Upload, UploadCloud } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -48,7 +48,7 @@ const page = () => {
       await authClient.updateUser({
         image: url,
         isOnboarded: true
-      })
+      } as any)
 
       router.push('/dashboard');
       router.refresh();
@@ -90,7 +90,7 @@ const page = () => {
           <p className='text-zinc-700'>Take a picture or upload an image.</p>
           <div className='w-full mt-5 border border-zinc-300 rounded-md bg-white'>
             <p className='font-semibold text-zinc-700 text-sm px-4 py-2'>Profile Picture</p>
-            {file.length == 0 && (
+            {!file && (
               <>
               <div className='relative'>
               <div className='mt-5 w-full flex items-center space-x-2 px-4'>
@@ -108,7 +108,7 @@ const page = () => {
             </div>
               </>
             )}
-            {file.length !== 0 && (
+            {file && (
               <div className='px-4 space-y-2 relative'>
                 <div className='p-5 bg-zinc-50 rounded-md flex flex-col '>
                   <div className='w-full items-center justify-center flex space-x-2'>
