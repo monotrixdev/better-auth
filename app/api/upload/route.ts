@@ -10,12 +10,6 @@ cloudinary.config({
 export async function POST(req: NextRequest) {
     try {
 
-            console.log("ENV CHECK:", {
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        secret: process.env.CLOUDINARY_API_SECRET?.slice(0, 5) // only shows first 5 chars
-    })
-
 
         const fromData = await req.formData();
         const file = fromData.get('file') as File;

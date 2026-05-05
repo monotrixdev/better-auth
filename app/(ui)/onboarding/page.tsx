@@ -14,7 +14,7 @@ const page = () => {
   const [file, setFile] = useState('')
   const [preview, setPreview] = useState('')
   const [loading, setLoading] = useState(false)
-  const addFile = useRef('');
+  const addFile = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
   const handleAddFile = () => {
