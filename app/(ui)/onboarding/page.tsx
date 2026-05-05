@@ -8,6 +8,7 @@ import { CheckCircle2, LayoutDashboardIcon, PlusCircle, SaveAll, Upload, UploadC
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 const page = () => {
   const [file, setFile] = useState('')
@@ -37,7 +38,12 @@ const page = () => {
         method: 'POST',
         body: formData
       });
-      const { url } = await uploadRes.json();
+      const data = await uploadRes.json();
+      if (data.error) {
+        toast.error(data.error || 'Failed tp upload images.')
+        return;
+      }
+      const url = data.url;
 
       await authClient.updateUser({
         image: url,
@@ -46,6 +52,8 @@ const page = () => {
 
       router.push('/dashboard');
       router.refresh();
+
+      toast.success("Succesfully uploaded file.")
 
 
     } catch (err) {

@@ -3,6 +3,7 @@ import { DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
 import HeaderPage from "./_components/header";
 import FotterPage from "./_components/fotter";
+import { Toaster } from "sonner";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${dmMono.variable} h-full antialiased`}>
       <body className="flex flex-col">
+        <Toaster position="top-center"/>
           {
             children
           }

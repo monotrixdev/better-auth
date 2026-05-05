@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { setLazyProp } from 'next/dist/server/api-utils';
 import { signIn } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const LoginLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(true);
@@ -56,7 +57,7 @@ const LoginLayout = () => {
                 password
             });
             if (res.error) {
-                alert(res.error.message || "Sign in failed");
+                toast.error(res.error.message || "Sign in failed");
             } else {
                 router.push("/dashboard");
             }
@@ -64,9 +65,9 @@ const LoginLayout = () => {
             
         } catch (error) {
             console.log(error);
+            toast.error("Unaspacted error detected")
         } finally {
             setIsLoading(false);
-            console.log("Stop");
       }
     }
 

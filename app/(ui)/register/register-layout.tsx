@@ -22,8 +22,11 @@ import { ifError } from 'assert';
 import { edgeServerPages } from 'next/dist/build/webpack/plugins/pages-manifest-plugin';
 import { keepMount } from 'better-auth/client';
 import { inherits } from 'util';
-import { signUp } from '@/lib/auth-client';
+import { authClient, signUp } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import Image from "next/image";
+
 
 const RegisterLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(false);
@@ -104,17 +107,25 @@ const RegisterLayout = () => {
                 password
             });
             if (res.error) {
-                alert(res.error.message);
+                toast.error(res.error.message);
             } else {
                 router.push("/dashboard");
             }
         } catch (err) {
             console.log(`Error detected: ${err}`)
+
         } finally {
             setIsLoading(false);
         }
       
 
+    }
+
+    const handleGoogleLogin = async () => {
+        await authClient.signIn.social({
+            provider: 'google',
+            callbackURL: '/dashboard'
+        })
     }
 
    useEffect(() => {
@@ -133,10 +144,12 @@ const RegisterLayout = () => {
                 </p>
             </div>
             <div className='w-full mt-4 max-w-[300px] grid grid-cols-2 sm:grid-cols-2 space-x-2'>
-                <Button variant="outline">
+                <Button onClick={handleGoogleLogin} variant="outline">
+                    <Image width={20} height={20} alt='Google Registration' src='/google.svg' />
                     Google
                 </Button>
-                <Button>
+                <Button variant="outline">
+                    <Image src='/github.svg' alt='Github Registration' width={20} height={20}/>
                     Github
                 </Button>
             </div>

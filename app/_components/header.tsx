@@ -27,14 +27,14 @@ const  HeaderPage =  () => {
       <div className="flex items-center justify-end">
         {session?.user && (
           <>
-          <div className='space-x-2'>
+          <div className='space-x-2 w-full flex items-center'>
                 <ItemsShow
           label="Dashboard"
           href="/dashboard"
           active={path === "/dashboard"}
         />
         <AvaterMenu />
-          </div>
+        </div>
         </>
         )}
         {!session?.user && (<>
@@ -45,7 +45,7 @@ const  HeaderPage =  () => {
         />
         <Link href="/login" className="group">
           <Button className="rounded-full px-4 py-5 bg-gradient-to-br from-purple-400 to-purple-700 to-purple-800">
-            Sign IN
+            Sign In
             <ArrowBigRight className="w-4 h-4 -rotate-30 group-hover:scale-105 rounded-full bg-white text-purple-600" />
           </Button>
         </Link>
