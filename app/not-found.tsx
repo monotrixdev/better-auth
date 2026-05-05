@@ -113,7 +113,6 @@ const NorFoundPage = () => {
   return (
     <>
     <HeaderPage />
-    <mail />
     <div className='w-screen py-10 bg-slate-50'>
         <div className='container w-full h-full flex flex-col items-center justify-center'>
             <h1 className='text-9xl font-bold font-serif bg-gradient-to-br from-zinc-600 via-zinc-700 to-zinc-800 text-transparent bg-clip-text'>
