@@ -11,7 +11,7 @@ import React, { useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 const page = () => {
-  const [file, setFile] = useState('')
+  const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState('')
   const [loading, setLoading] = useState(false)
   const addFile = useRef<HTMLInputElement | null>(null);
