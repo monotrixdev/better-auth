@@ -11,7 +11,6 @@ const layout = ({ children} : {
     <main className='min-h-screen'>
         {children}
     </main>
-    <FotterPage />
     </>
   )
 }

@@ -9,6 +9,7 @@ import { setLazyProp } from 'next/dist/server/api-utils';
 import { signIn } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 const LoginLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(true);
@@ -89,10 +90,11 @@ const LoginLayout = () => {
             </div>
             <div className='w-full max-w-[300px] flex flex-col items-center justify-center space-y-2'>
                 <Button variant="outline" className="px-4 w-full">
-                    
+                    <Image src="/google.svg" width={20} height={20} alt='Google Login'/>
                     Continue with Google
                 </Button>
-                <Button className="w-full">
+                <Button variant="outline" className="w-full">
+                    <Image src="/github.svg" width={20} height={20} alt='Github Login'/>
                     Continue with Github
                 </Button>
             </div>

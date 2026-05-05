@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { authClient, useSession } from '@/lib/auth-client';
-import { ArrowBigLeft, ArrowBigRight } from 'lucide-react';
+import { ArrowBigLeft, ArrowBigRight, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -43,10 +43,10 @@ const  HeaderPage =  () => {
           href="/register"
           active={path === "/register"}
         />
-        <Link href="/login" className="group">
-          <Button className="rounded-full px-4 py-5 bg-gradient-to-br from-purple-400 to-purple-700 to-purple-800">
-            Sign In
-            <ArrowBigRight className="w-4 h-4 -rotate-30 group-hover:scale-105 rounded-full bg-white text-purple-600" />
+        <Link href="/login" className="group ml-2 p-[1px] bg-gradient-to-br from-purple-800 via-purple-500 to-purple-600 rounded-full">
+          <Button className="rounded-full px-4 bg-gradient-to-br from-purple-400 via-purple-800 to-purple-900">
+            Sign In 
+            <ArrowUpRight />
           </Button>
         </Link>
         </>)}
