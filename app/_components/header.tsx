@@ -10,7 +10,7 @@ import AvaterMenu from './avater-menu';
 import { kAPIErrorHeaderSymbol } from 'better-auth';
 import { Belanosima } from 'next/font/google';
 
- const  HeaderPage =  () => {
+ const HeaderPage =  () => {
   const {data: session, isPending} = useSession();
 
 
