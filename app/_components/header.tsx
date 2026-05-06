@@ -10,7 +10,7 @@ import AvaterMenu from './avater-menu';
 import { kAPIErrorHeaderSymbol } from 'better-auth';
 import { Belanosima } from 'next/font/google';
 
-export const  HeaderPage =  () => {
+ const  HeaderPage =  () => {
   const {data: session, isPending} = useSession();
 
 
@@ -75,3 +75,6 @@ export const ItemsShow = ({ label = '', href = '', active}: {
     </Link>
   )
 }
+
+
+export default HeaderPage
