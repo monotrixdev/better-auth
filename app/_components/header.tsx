@@ -9,6 +9,7 @@ import React from 'react'
 import AvaterMenu from './avater-menu';
 import { kAPIErrorHeaderSymbol } from 'better-auth';
 import { Belanosima } from 'next/font/google';
+import Spinner from './spinner';
 
  const HeaderPage =  () => {
   const {data: session, isPending} = useSession();
@@ -26,6 +27,8 @@ import { Belanosima } from 'next/font/google';
           Mono<p className="font-normal text-zinc-700">Trix</p>
         </h3>
       </div>
+      {isPending && <Spinner />}
+      {session?.user && (
       <div className="flex items-center justify-end">
         {session?.user && (
           <>
@@ -58,6 +61,7 @@ import { Belanosima } from 'next/font/google';
         </Link>
         </>)}
       </div>
+      )}
     </header>
   );
 }
