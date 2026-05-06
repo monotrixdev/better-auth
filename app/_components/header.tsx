@@ -2,12 +2,13 @@
 
 import { Button } from '@/components/ui/button'
 import { authClient, useSession } from '@/lib/auth-client';
-import { ArrowBigLeft, ArrowBigRight, ArrowUpRight } from 'lucide-react';
+import { ArrowBigLeft, ArrowBigRight, ArrowUpRight, Bell, BellCheck } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import AvaterMenu from './avater-menu';
 import { kAPIErrorHeaderSymbol } from 'better-auth';
+import { Belanosima } from 'next/font/google';
 
 export const  HeaderPage =  () => {
   const {data: session, isPending} = useSession();
@@ -34,6 +35,11 @@ export const  HeaderPage =  () => {
           href="/dashboard"
           active={path === "/dashboard"}
         />
+        <div className='p-2 relative rounded-full bg-indigo-600/10 hover:bg-purple-600/20'>
+        <div className='absolute p-1 top-1 right-0 rounded-full bg-purple-700'></div>
+          
+          <Bell className='text-purple-800 w-5 h-5' />
+        </div>
         <AvaterMenu />
         </div>
         </>
