@@ -23,17 +23,30 @@ export const auth = betterAuth({
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+        },
+        github: {
+            clientId: process.env.GITHUB_CLIENT_ID!,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET!
         }
     },
     databaseHooks: {
         user: {
             create: {
                 after: async (user) => {
+                    if (user.image) {
+                        await db.collection('user').updateOne(
+                            { id: user.id},
+                            { $set: { isOnboarded: true }}
+                        )
+
+                    } else {
                     const defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || user.email.split('@')[0])}&background=random`;
                     await db.collection("user").updateOne(
                         { id: user.id },
                         { $set: { image: defaultAvatar } }
                     );
+                    }
+             
                 }
             }
         }

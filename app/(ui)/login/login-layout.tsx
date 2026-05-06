@@ -6,10 +6,11 @@ import React, { useEffect, useState } from 'react'
 import Spinner from '../../_components/spinner';
 import Link from 'next/link';
 import { setLazyProp } from 'next/dist/server/api-utils';
-import { signIn } from '@/lib/auth-client';
+import { authClient, signIn } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import Image from 'next/image';
+import { signInSocial } from 'better-auth/api';
 
 const LoginLayout = () => {
     const [passwordHidden, setPasswordHidden] = useState(true);
@@ -89,11 +90,21 @@ const LoginLayout = () => {
                 </p>
             </div>
             <div className='w-full max-w-[300px] flex flex-col items-center justify-center space-y-2'>
-                <Button variant="outline" className="px-4 w-full">
+                <Button onClick={async () => {
+                    await authClient.signIn.social({
+                        provider: 'google',
+                        callbackURL: '/dashboard'
+                    })
+                }} variant="outline" className="px-4 w-full">
                     <Image src="/google.svg" width={20} height={20} alt='Google Login'/>
                     Continue with Google
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button onClick={async () => {
+                    await authClient.signIn.social({
+                        provider: 'github',
+                        callbackURL: '/dashboard'
+                    })
+                }} variant="outline" className="w-full">
                     <Image src="/github.svg" width={20} height={20} alt='Github Login'/>
                     Continue with Github
                 </Button>

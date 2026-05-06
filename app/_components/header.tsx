@@ -7,8 +7,9 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import AvaterMenu from './avater-menu';
+import { kAPIErrorHeaderSymbol } from 'better-auth';
 
-const  HeaderPage =  () => {
+export const  HeaderPage =  () => {
   const {data: session, isPending} = useSession();
 
 
@@ -68,5 +69,3 @@ export const ItemsShow = ({ label = '', href = '', active}: {
     </Link>
   )
 }
-
-export  default HeaderPage

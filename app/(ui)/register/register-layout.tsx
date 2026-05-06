@@ -148,7 +148,12 @@ const RegisterLayout = () => {
                     <Image width={20} height={20} alt='Google Registration' src='/google.svg' />
                     Google
                 </Button>
-                <Button variant="outline">
+                <Button onClick={async () => {
+                    await authClient.signIn.social({
+                        provider: 'github',
+                        callbackURL: '/dashboard'
+                    })
+                }} variant="outline">
                     <Image src='/github.svg' alt='Github Registration' width={20} height={20}/>
                     Github
                 </Button>

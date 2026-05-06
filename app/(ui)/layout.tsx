@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import HeaderPage from '../_components/header'
-import FotterPage from '../_components/fotter'
+import FotterPage from '../_components/fotter'         
+import { HeaderPage } from '../_components/header'
 
 const layout = ({ children} : {
     children: ReactNode

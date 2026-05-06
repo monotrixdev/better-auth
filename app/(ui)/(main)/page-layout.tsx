@@ -9,6 +9,7 @@ const PageLayout = () => {
     <main className='mx-auto space-y-5 bg-red-50'>
         <HeroPage />
         <PricingPage />
+        <FotterPage />
     </main>
   )
 }
