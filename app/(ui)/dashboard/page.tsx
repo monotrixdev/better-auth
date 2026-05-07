@@ -79,11 +79,11 @@ const [lookup, setLookup] = useState({
                 Search
               </Button>
             </div>
-            {!lookup.length > 0 && (
+            {lookup && (
               <div className='rounded-md border border-zinc-200 bg-muted-foreground/5 p-4 px-4 mt-5'>
                 <div className='flex items-center space-x-2'>
                   {lookup.image && (
-                    <Image width={20} height={20} className='2-10 h-10 rounded-full' src={lookup.image}/>
+                    <Image width={20} height={20} className='2-10 h-10 rounded-full' src={lookup.image} alt={lookup.name}/>
                   )}
                   {
                     !lookup.image && (
