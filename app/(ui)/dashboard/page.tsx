@@ -1,12 +1,23 @@
+
+'use client'
+
 import { Angry, ChartNoAxesColumnIncreasing, Search, Send, Timer, TimerIcon, UsersRound } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
+import { authClient } from '@/lib/auth-client'
 
 const Dashboard = () => {
+  const {data: session} = authClient.useSession();
   return (
     <section className='w-screen h-screen bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex gap-4'>
+        <div>
+          <h1 className='text-lg font-medium'>Wellcome to dashboard {session?.user?.name.slice(0,6).toLocaleLowerCase()},</h1>
+          <p className='text-muted-foreground text-sm mt-1'>
+            Here is your dashboard where you can see all the analytics about your account and usage. You can also manage your account settings and preferences from here.
+          </p>
+        </div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex gap-4 mt-10'>
           <div className='border border-zinc-200 rounded-md p-4 flex flex-col px-4 bg-white'>
             <Send className='p-2 w-8 h-8 rounded-md text-green-500 bg-green-50 '/>
             <h3 className='text-sm text-muted-foreground mt-2'>SMS Sent</h3>
