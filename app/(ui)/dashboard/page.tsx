@@ -1,4 +1,4 @@
-import { Angry, Timer, TimerIcon } from 'lucide-react'
+import { Angry, ChartNoAxesColumnIncreasing, Search, Send, Timer, TimerIcon, UsersRound } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
 
@@ -6,16 +6,42 @@ const Dashboard = () => {
   return (
     <section className='w-screen h-screen bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
-        <div className='rounded-md border border-zinc-300 bg-white flex itemx-center justify-center flex-col'>
-          <div className='flex px-4 py-3 space-x-2 items-center rounded-tl-md rounded-tr-md bg-white'>
-            <span className='rounded-full p-1 bg-indigo-600'></span>
-            <Timer className='w-6 h-6 p-1 rounded-md bg-gray-100 border border-gray-300 text-muted-foreground text-center'/>
-            <h3 className='text-sm font-semibold text-zinc-800'>My Task</h3>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex gap-4'>
+          <div className='border border-zinc-200 rounded-md p-4 flex flex-col px-4 bg-white'>
+            <Send className='p-2 w-8 h-8 rounded-md text-green-500 bg-green-50 '/>
+            <h3 className='text-sm text-muted-foreground mt-2'>SMS Sent</h3>
+            <h3 className='font-semibold text-xl text-zinc-900'>403</h3>
+            <div className='flex items-center space-x-1 mt-1'>
+              <ChartNoAxesColumnIncreasing  className='w-4 h-4 text-green-500'/>
+              <span className='text-xs text-green-500'>+12% from Last Week</span>
+            </div>
           </div>
-          <hr/>
-          <div className='px-4 py-5 flex items-center justify-center flex-col'>
-            <TimerIcon className='w-7 h-7 mb-2 text-muted-foreground rounded-full  bg-gray-50' />
-            <p className='text-xs text-muted-foreground'>No in recent task</p>
+          <div className='border border-zinc-200 rounded-md p-4 px-4 bg-white'>
+            <Timer className='w-8 h-8 p-2 rounded-md bg-yellow-50 text-yellow-500'/>
+            <h3 className='text-sm text-muted-foreground mt-2'>Sheduled</h3>
+            <h3 className='text-xl text-zinc-900 font-semibold'>198</h3>
+            <div className='flex items-center space-x-2 mt-1'>
+              <ChartNoAxesColumnIncreasing className='w-4 h-4 text-green-500'/>
+              <p className='text-xs text-green-500 '>7 pending</p>
+            </div>
+          </div>
+            <div className='border border-zinc-200 rounded-md p-4 px-4 bg-white'>
+            <UsersRound className='w-8 h-8 p-2 rounded-md bg-indigo-50 text-indigo-500'/>
+            <h3 className='text-sm text-muted-foreground mt-2'>Sunmitted Numbers</h3>
+            <h3 className='text-xl text-zinc-900 font-semibold'>190</h3>
+            <div className='flex items-center space-x-2 mt-1'>
+              <ChartNoAxesColumnIncreasing className='w-4 h-4 text-green-500'/>
+              <p className='text-xs text-green-500 '>5+ today</p>
+            </div>
+          </div>
+            <div className='border border-zinc-200 rounded-md p-4 px-4 bg-white'>
+            <Search className='w-8 h-8 p-2 rounded-md bg-red-50 text-destructive'/>
+            <h3 className='text-sm text-muted-foreground mt-2'>Lookups Done</h3>
+            <h3 className='text-xl text-zinc-900 font-semibold'>41</h3>
+            <div className='flex items-center space-x-2 mt-1'>
+              <ChartNoAxesColumnIncreasing className='w-4 h-4 text-destructive'/>
+              <p className='text-xs text-destructive '>31+ yesterday</p>
+            </div>
           </div>
         </div>
       </div>
