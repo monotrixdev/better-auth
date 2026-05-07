@@ -20,7 +20,7 @@ const [lookup, setLookup] = useState({
   name: 'Sabbir Ahmed'
 });
   return (
-    <section className='w-screen h-screen bg-zinc-50 px-4 py-10'>
+    <section className='w-screen bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
         <div>
           <h1 className='text-lg font-medium'>Wellcome to dashboard {session?.user?.name.slice(0,6).toLocaleLowerCase()},</h1>
@@ -73,7 +73,7 @@ const [lookup, setLookup] = useState({
               <h3 className='font-semibold text-zinc-900 text-sm'>NUMBER LOOKUP</h3>
             </div>
             <div className='mt-2 flex items-center space-x-2'>
-              <Input className='py-5 w-full'  type='number' placeholder='ENTER LOOKUP NUMBER' required/>
+              <Input className='py-5 w-full' maxLength={11} minLength={11} datatype='number' type='number' placeholder='ENTER LOOKUP NUMBER' required/>
               <Button size='lg' className="py-5 px-4 font-semibold" variant="outline">
                 <Search className='w-6 h-6 text-zinc-800'/>
                 Search
