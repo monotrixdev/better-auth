@@ -1,13 +1,24 @@
 
 'use client'
 
-import { Angry, ChartNoAxesColumnIncreasing, Search, Send, Timer, TimerIcon, UsersRound } from 'lucide-react'
-import React from 'react'
+import { Angry, ChartNoAxesColumnIncreasing, MessageSquareText, Search, Send, Timer, TimerIcon, User2, UsersRound } from 'lucide-react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { authClient } from '@/lib/auth-client'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 const Dashboard = () => {
   const {data: session} = authClient.useSession();
+const [lookup, setLookup] = useState({
+  status: true,
+  number: '+1234567890',
+  carrier: 'Verizon',
+  location: 'New York, USA',
+  type: 'Mobile',
+  image: '',
+  name: 'Sabbir Ahmed'
+});
   return (
     <section className='w-screen h-screen bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
@@ -53,6 +64,57 @@ const Dashboard = () => {
               <ChartNoAxesColumnIncreasing className='w-4 h-4 text-destructive'/>
               <p className='text-xs text-destructive '>31+ yesterday</p>
             </div>
+          </div>
+        </div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 mt-5'>
+          <div className='rounded-md border border-zinc-200 bg-white p-4 px-4'>
+            <div className='flex items-center space-x-2'>
+              <Search className='w-8 h-8 p-2 rounded-md text-green-600 bg-green-100 border border-green-200'/>
+              <h3 className='font-semibold text-zinc-900 text-sm'>NUMBER LOOKUP</h3>
+            </div>
+            <div className='mt-2 flex items-center space-x-2'>
+              <Input className='py-5 w-full'  type='number' placeholder='ENTER LOOKUP NUMBER' required/>
+              <Button size='lg' className="py-5 px-4 font-semibold" variant="outline">
+                <Search className='w-6 h-6 text-zinc-800'/>
+                Search
+              </Button>
+            </div>
+            {!lookup.length > 0 && (
+              <div className='rounded-md border border-zinc-200 bg-muted-foreground/5 p-4 px-4 mt-5'>
+                <div className='flex items-center space-x-2'>
+                  {lookup.image && (
+                    <Image width={20} height={20} className='2-10 h-10 rounded-full' src={lookup.image}/>
+                  )}
+                  {
+                    !lookup.image && (
+                      <div className='p-3 rounded-full flex text-center font-bold bg-indigo-50 w-fit border border-zinc-200 text-indigo-500 text-xl'>
+                        {lookup.name.slice(0, 2).toUpperCase()}
+                      </div>
+                    )
+                  }
+                  <div>
+                    <h3 className='font-bold'>{lookup.name}</h3>
+                    <p className='text-sm text-muted-foreground'>{lookup.number}</p>
+                  </div>
+                </div>
+                <div className='flex mx-auto space-x-2 items-center justify-between mt-5'>
+                  <span className='px-2 py-[1px] rounded-full bg-green-100 border-green-200 text-green-700 text-sm tracking-tight'>{lookup.carrier}</span>
+                  <span className='px-2 py-[1px] rounded-full bg-blue-100 border-blue-200 text-blue-700 text-sm tracking-tight'>{lookup.location}</span>
+                  <span className='px-2 py-[1px] rounded-full bg-purple-100 border-purple-200 text-purple-700 text-sm tracking-tight'>{lookup.type}</span>
+                </div>
+                <hr className='mt-4'/>
+                <div className='mt-5 grid grid-cols-2 flex items-center justify-between gap-2 space-x-2'>
+                  <Button variant='outline' className='w-full py-5'>
+                    <MessageSquareText className='w-5 h-5 text-zinc-800'/>
+                    Send SMS
+                  </Button>
+                  <Button variant='outline' className='w-full py-5 '>
+                    <User2 className='w-5 h-5 text-zinc-800'/>
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
