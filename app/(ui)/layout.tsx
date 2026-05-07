@@ -8,7 +8,7 @@ const layout = ({ children} : {
   return (
     <>
     <HeaderPage />
-    <main className='min-h-screen'>
+    <main className='min-h-screen mx-auto'>
         {children}
     </main>
     </>
