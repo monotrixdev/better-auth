@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button'
 import Spinner from '@/app/_components/spinner'
 import { toast } from 'sonner'
 import { set } from 'mongoose'
+import { Look } from '@/lib/lookup'
 
 const Dashboard = () => {
   const {data: session} = authClient.useSession();

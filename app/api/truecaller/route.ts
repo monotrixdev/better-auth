@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { Look } from "@/lib/lookup";
 import { NextRequest, NextResponse } from "next/server";
 
 function formatPhoneNumber(phoneNumber: string) {
@@ -91,6 +92,13 @@ export async function GET(req: NextRequest) {
     const carrier = detectCarrier(cli);
 
     if (nameMatch && typeMatch) {
+
+      Look.create({
+        userId: result.session.user.id,
+        phoneNumber: cli,
+        status: true,
+      })
+      
       return NextResponse.json({
         status: true,
         responseTime: `${responseTime}s`,
