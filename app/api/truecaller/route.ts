@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { connectDB } from "@/lib/db";
 import { Look } from "@/lib/lookup";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -35,6 +36,7 @@ function detectCarrier(number: string) {
 }
 
 export async function GET(req: NextRequest) {
+  await connectDB();
 
 
   const result = await auth.api.getSession({
@@ -47,7 +49,6 @@ export async function GET(req: NextRequest) {
       { status: 401 }
     );
   }
-
 
   const start = performance.now();
 
@@ -93,10 +94,10 @@ export async function GET(req: NextRequest) {
 
     if (nameMatch && typeMatch) {
 
-      Look.create({
-        userId: 'eufuegfygf',
+      await Look.create({
+        userId: result?.user?.id,
         status: true,
-        phoneNumber: cli,
+        phoneNumber: cli
       })
       
       return NextResponse.json({
