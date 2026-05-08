@@ -94,7 +94,7 @@ export async function GET(req: NextRequest) {
     if (nameMatch && typeMatch) {
 
       Look.create({
-        userId: null,
+        userId: 'eufuegfygf',
         status: true,
         phoneNumber: cli,
       })
