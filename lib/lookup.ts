@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import mongoose, { mongo } from "mongoose";
 
 const lookSchema = new mongoose.Schema({
