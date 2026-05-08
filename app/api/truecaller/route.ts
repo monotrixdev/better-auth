@@ -1,3 +1,5 @@
+import { auth } from "@/lib/auth";
+import { Look } from "@/lib/lookup";
 import { NextRequest, NextResponse } from "next/server";
 
 function formatPhoneNumber(phoneNumber: string) {
@@ -33,6 +35,20 @@ function detectCarrier(number: string) {
 }
 
 export async function GET(req: NextRequest) {
+
+
+  const result = await auth.api.getSession({
+    headers: req.headers,
+  });
+
+  if (!result?.session) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
+
   const start = performance.now();
 
   const number = req.nextUrl.searchParams.get("number");
@@ -76,6 +92,10 @@ export async function GET(req: NextRequest) {
     const carrier = detectCarrier(cli);
 
     if (nameMatch && typeMatch) {
+      await Look.create({
+        userId: result?.user?.id,
+        phoneNumber: cli,
+      })
       return NextResponse.json({
         status: true,
         responseTime: `${responseTime}s`,
