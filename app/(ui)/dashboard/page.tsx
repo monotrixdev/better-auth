@@ -7,23 +7,42 @@ import Image from 'next/image'
 import { authClient } from '@/lib/auth-client'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import Spinner from '@/app/_components/spinner'
+import { toast } from 'sonner'
+import { set } from 'mongoose'
 
 const Dashboard = () => {
   const {data: session} = authClient.useSession();
-const [lookup, setLookup] = useState({
-  status: true,
-  number: '+1234567890',
-  carrier: 'Verizon',
-  location: 'New York, USA',
-  type: 'Mobile',
-  image: '',
-  name: 'Sabbir Ahmed'
-});
+  const [trueLoading, setTrueLoading] = useState(false)
+  const [lookuoNumber, setLookupNumber] = useState(""); 
+const [lookup, setLookup] = useState<any>(null);
+
+const handleSearch = async () => {
+  if (!lookuoNumber || lookuoNumber.length !== 11) {
+    toast.error("Please enter a valid 11-digit BD number.")
+    return;
+  }
+  setTrueLoading(true);
+  try {
+    const res = await fetch(`/api/truecaller?number=${lookuoNumber}`);
+    const data = await res.json();
+    if (res.ok) {
+      toast.success("Number lookup successful!")
+      setLookup(data);
+    } else {
+      toast.error(data.error || "Failed to lookup number. Please try again.")
+    }
+  } catch (err) {
+    toast.error("Failed to lookup number. Please try again.")
+  } finally {
+    setTrueLoading(false);
+  }
+}
   return (
     <section className='w-screen bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
         <div>
-          <h1 className='text-lg font-medium'>Wellcome to dashboard {session?.user?.name.slice(0,6).toLocaleLowerCase()},</h1>
+          <h1 className='text-lg font-medium'>Wellcome to dashboard {session?.user?.name?.slice(0,6).toLocaleLowerCase()},</h1>
           <p className='text-muted-foreground text-sm mt-1'>
             Here is your dashboard where you can see all the analytics about your account and usage. You can also manage your account settings and preferences from here.
           </p>
@@ -73,10 +92,11 @@ const [lookup, setLookup] = useState({
               <h3 className='font-semibold text-zinc-900 text-sm'>NUMBER LOOKUP</h3>
             </div>
             <div className='mt-2 flex items-center space-x-2'>
-              <Input className='py-5 w-full' maxLength={11} minLength={11} datatype='number' type='number' placeholder='ENTER LOOKUP NUMBER' required/>
-              <Button size='lg' className="py-5 px-4 font-semibold" variant="outline">
-                <Search className='w-6 h-6 text-zinc-800'/>
-                Search
+              <Input onChange={(e) => setLookupNumber(e.target.value)} value={lookuoNumber} className='py-5 w-full' maxLength={11} minLength={11} datatype='number' type='number' placeholder='ENTER LOOKUP NUMBER' required/>
+              <Button onClick={handleSearch} disabled={trueLoading} size='lg' className="py-5 px-4 font-semibold" variant="outline">
+                {trueLoading && <Spinner/>}
+                {!trueLoading && <Search className='w-4 h-4 text-zinc-800'/>}
+                {trueLoading ? "Looking up..." : "Lookup"}
               </Button>
             </div>
             {lookup && (
@@ -88,19 +108,19 @@ const [lookup, setLookup] = useState({
                   {
                     !lookup.image && (
                       <div className='p-3 rounded-full flex text-center font-bold bg-indigo-50 w-fit border border-zinc-200 text-indigo-500 text-xl'>
-                        {lookup.name.slice(0, 2).toUpperCase()}
+                        {lookup?.name?.slice(0, 2).toUpperCase()}
                       </div>
                     )
                   }
                   <div>
-                    <h3 className='font-bold'>{lookup.name}</h3>
-                    <p className='text-sm text-muted-foreground'>{lookup.number}</p>
+                    <h3 className='font-bold'>{lookup?.name}</h3>
+                    <p className='text-sm text-muted-foreground'>{lookup?.number}</p>
                   </div>
                 </div>
                 <div className='flex mx-auto space-x-2 items-center justify-between mt-5'>
-                  <span className='px-2 py-[1px] rounded-full bg-green-100 border-green-200 text-green-700 text-sm tracking-tight'>{lookup.carrier}</span>
-                  <span className='px-2 py-[1px] rounded-full bg-blue-100 border-blue-200 text-blue-700 text-sm tracking-tight'>{lookup.location}</span>
-                  <span className='px-2 py-[1px] rounded-full bg-purple-100 border-purple-200 text-purple-700 text-sm tracking-tight'>{lookup.type}</span>
+                  <span className='px-2 py-[1px] rounded-full bg-green-100 border-green-200 text-green-700 text-sm tracking-tight'>{lookup?.carrier}</span>
+                  <span className='px-2 py-[1px] rounded-full bg-blue-100 border-blue-200 text-blue-700 text-sm tracking-tight'>{lookup?.location}</span>
+                  <span className='px-2 py-[1px] rounded-full bg-purple-100 border-purple-200 text-purple-700 text-sm tracking-tight'>{lookup?.type || "Unknown"}</span>
                 </div>
                 <hr className='mt-4'/>
                 <div className='mt-5 grid grid-cols-2 flex items-center justify-between gap-2 space-x-2'>
@@ -113,6 +133,11 @@ const [lookup, setLookup] = useState({
                     Submit
                   </Button>
                 </div>
+              </div>
+            )}
+            {!lookup && (
+              <div className='w-full h-[120px] flex items-center justify-center p-4'>
+                <p className='text-sm text-muted-foreground'>Enter a BD number to look up caller info.</p>
               </div>
             )}
           </div>
