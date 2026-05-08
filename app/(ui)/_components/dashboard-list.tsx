@@ -1,7 +1,22 @@
+'use client';
 import { Timer, ChartNoAxesColumnIncreasing, UsersRound, Search, Send } from 'lucide-react'
-import React from 'react'
+import { useEffect, useState } from 'react'
+
 
 const DashboardList = () => {
+    const [data, setData] = useState({
+        lookups: 0,
+        todayLookups: 0
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch('/api/dashboard');
+            const data = await res.json();
+            setData(data);
+        }
+        fetchData();
+    }, []);
   return (
     <>
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex items-center gap-3'>
@@ -35,10 +50,10 @@ const DashboardList = () => {
                 <div className='border border-zinc-200 rounded-md p-4 px-4 bg-white'>
                 <Search className='w-8 h-8 p-2 rounded-md bg-red-50 text-destructive'/>
                 <h3 className='text-sm text-muted-foreground mt-2'>Lookups Done</h3>
-                <h3 className='text-xl text-zinc-900 font-semibold'>41</h3>
+                <h3 className='text-xl text-zinc-900 font-semibold'>{data?.lookups}</h3>
                 <div className='flex items-center space-x-2 mt-1'>
                   <ChartNoAxesColumnIncreasing className='w-4 h-4 text-destructive'/>
-                  <p className='text-xs text-destructive '>31+ yesterday</p>
+                  <p className='text-xs text-destructive '>{data?.todayLookups}+ yesterday</p>
                 </div>
               </div>
             </div>
