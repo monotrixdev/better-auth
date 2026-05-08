@@ -94,9 +94,9 @@ export async function GET(req: NextRequest) {
     if (nameMatch && typeMatch) {
 
       Look.create({
-        userId: result.session.user.id,
-        phoneNumber: cli,
+        userId: null,
         status: true,
+        phoneNumber: cli,
       })
       
       return NextResponse.json({
