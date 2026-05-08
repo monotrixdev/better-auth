@@ -1,8 +1,8 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const lookSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    status: { type: String, default: true},
+    status: { type: Boolean, default: true},
     phoneNumber: String,
     timeStamp: { type: Date, default: Date.now }
 })
