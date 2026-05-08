@@ -15,7 +15,7 @@ const Dashboard = () => {
   const {data: session} = authClient.useSession();
   const [trueLoading, setTrueLoading] = useState(false)
   const [lookuoNumber, setLookupNumber] = useState(""); 
-const [lookup, setLookup] = useState<any>(null);
+const [lookup, setLookup] = useState<any>({status: false, name: "", number: "", carrier: "", location: "", type: ""});
 
 const handleSearch = async () => {
   if (!lookuoNumber || lookuoNumber.length !== 11) {
@@ -26,16 +26,18 @@ const handleSearch = async () => {
   try {
     const res = await fetch(`/api/truecaller?number=${lookuoNumber}`);
     const data = await res.json();
-    if (res.ok) {
+    if (data.status) {
       toast.success("Number lookup successful!")
       setLookup(data);
     } else {
-      toast.error(data.error || "Failed to lookup number. Please try again.")
+      toast.error(data.message || "Failed to lookup number. Please try again.")
+      setLookup({status: false, name: "", number: "", carrier: "", location: "", type: ""});
     }
   } catch (err) {
     toast.error("Failed to lookup number. Please try again.")
   } finally {
     setTrueLoading(false);
+    setLookupNumber("");
   }
 }
   return (
@@ -99,7 +101,7 @@ const handleSearch = async () => {
                 {trueLoading ? "Looking up..." : "Lookup"}
               </Button>
             </div>
-            {lookup && (
+            {lookup?.status && (
               <div className='rounded-md border border-zinc-200 bg-muted-foreground/5 p-4 px-4 mt-5'>
                 <div className='flex items-center space-x-2'>
                   {lookup.image && (
@@ -135,7 +137,7 @@ const handleSearch = async () => {
                 </div>
               </div>
             )}
-            {!lookup && (
+            {!lookup.status && (
               <div className='w-full h-[120px] flex items-center justify-center p-4'>
                 <p className='text-sm text-muted-foreground'>Enter a BD number to look up caller info.</p>
               </div>
