@@ -12,8 +12,8 @@ import { Belanosima } from 'next/font/google';
 import Spinner from './spinner';
 
 interface HeaderProps {
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    open?: boolean;
+    setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
  const HeaderPage =  ({ open, setOpen} : HeaderProps) => {
@@ -35,7 +35,7 @@ interface HeaderProps {
       </div>
       )}
       {session?.user && (
-        <PanelLeft onClick={() => setOpen(!open)} className='w-6 h-6 text-zinc-900'/>
+        <PanelLeft onClick={() => setOpen && setOpen(!open)} className='w-6 h-6 text-zinc-900'/>
       )}
       {isPending && <Spinner />}
       {!isPending && (
