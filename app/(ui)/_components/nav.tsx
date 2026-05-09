@@ -32,10 +32,14 @@ const Sidebar = ({ open, setOpen }: SideBarProps) => {
         </h3>
       </div>
       <hr />
-      <div className='px-4 py-1 mt-5 space-y-1'>
+      <div className='px-4 py-1 mt-5 space-y-1 h-full'>
         <NavItems label='Dashboard' icon={LayoutDashboard} to="/" active={pathname === '/dashboard'}/>
         <NavItems label='Profile' icon={CircleUserRound} to='/dashboard/profile' active={pathname === '/dashboard/profile'}/>
         <NavItems label='Settings' icon={Settings} to='/dashboard/settings' active={pathname === '/dashboard/settings'}/>
+      </div>
+      <hr />
+      <div>
+        
       </div>
     </aside>
     </>
