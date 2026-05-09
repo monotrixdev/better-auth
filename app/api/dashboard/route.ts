@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
 
   const totalLookup = await Look.countDocuments({ userId: session?.user?.id});
   const today = await Look.countDocuments({
+    userId: session?.user?.id,
     timeStamp: {
         $gte: new Date(new Date().setHours(0, 0, 0, 0)),
     },

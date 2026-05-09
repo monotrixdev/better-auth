@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { authClient, useSession } from '@/lib/auth-client';
-import { ArrowBigLeft, ArrowBigRight, ArrowUpRight, Bell, BellCheck } from 'lucide-react';
+import { ArrowBigLeft, ArrowBigRight, ArrowUpRight, Bell, BellCheck, PanelLeft } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -19,6 +19,7 @@ import Spinner from './spinner';
     const active = path === '/register'
   return (
     <header className="flex items-center justify-between bg-white border-b px-2 py-2">
+      {!session?.user && (
       <div className="flex space-x-2 items-center">
         <div className="px-3 py-1 flex items-center justify-center font-medium text-lg text-center text-white rounded-lg bg-zinc-900">
           M
@@ -27,8 +28,12 @@ import Spinner from './spinner';
           Mono<p className="font-normal text-zinc-700">Trix</p>
         </h3>
       </div>
-      {isPending && <Spinner />}
+      )}
       {session?.user && (
+        <PanelLeft className='w-6 h-6 text-zinc-900'/>
+      )}
+      {isPending && <Spinner />}
+      {!isPending && (
       <div className="flex items-center justify-end">
         {session?.user && (
           <>
