@@ -3,10 +3,12 @@ import React from 'react'
 import HeroPage from '../_components/hero-page'
 import PricingPage from '../_components/pricing-page'
 import FotterPage from '../../_components/fotter'
+import HeaderPage from '@/app/_components/header'
 
 const PageLayout = () => {
   return (
-    <main className='mx-auto space-y-5 bg-red-50'>
+    <main className='mx-auto bg-red-50'>
+        <HeaderPage />
         <HeroPage />
         <PricingPage />
         <FotterPage />
