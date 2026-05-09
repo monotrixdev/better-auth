@@ -11,7 +11,12 @@ import { kAPIErrorHeaderSymbol } from 'better-auth';
 import { Belanosima } from 'next/font/google';
 import Spinner from './spinner';
 
- const HeaderPage =  () => {
+interface HeaderProps {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+ const HeaderPage =  ({ open, setOpen} : HeaderProps) => {
   const {data: session, isPending} = useSession();
 
 
@@ -30,7 +35,7 @@ import Spinner from './spinner';
       </div>
       )}
       {session?.user && (
-        <PanelLeft className='w-6 h-6 text-zinc-900'/>
+        <PanelLeft onClick={() => setOpen(!open)} className='w-6 h-6 text-zinc-900'/>
       )}
       {isPending && <Spinner />}
       {!isPending && (

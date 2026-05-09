@@ -43,7 +43,7 @@ const handleSearch = async () => {
   }
 }
   return (
-    <section className='w-screen bg-zinc-50 px-4 py-10'>
+    <section className='w-full bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
         <div>
           <h1 className='text-lg font-medium'>Wellcome to dashboard {session?.user?.name?.slice(0,6).toLocaleLowerCase()},</h1>

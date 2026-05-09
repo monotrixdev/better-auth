@@ -1,7 +1,10 @@
-// app/dashboard/layout.tsx
+// app/dashboard/layout.t
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import Sidebar from "../_components/nav";
+import React from "react";
+import DashboardShell from "@/app/_components/dashboard-shell";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
     const session = await auth.api.getSession({
@@ -16,5 +19,5 @@ export default async function DashboardLayout({ children }: { children: React.Re
         redirect('/onboarding');
     }
 
-    return <>{children}</>;
+    return <DashboardShell>{children}</DashboardShell>
 }
