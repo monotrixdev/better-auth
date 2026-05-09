@@ -1,5 +1,8 @@
 'use client';
 import { cn } from '@/lib/utils';
+import { CircleUserRound, LayoutDashboard, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react'
 
 interface SideBarProps {
@@ -8,6 +11,7 @@ interface SideBarProps {
 }
 
 const Sidebar = ({ open, setOpen }: SideBarProps) => {
+  const pathname = usePathname();
  
   return (
     <>
@@ -19,7 +23,7 @@ const Sidebar = ({ open, setOpen }: SideBarProps) => {
         'fixed md:static top-0 left-0 z-50 h-screen w-64 border-r bg-white transition-transform duration-300 ease-in-out',
         open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
     )}>
-    <div className="flex space-x-2 items-center px-4 py-3">
+    <div className="flex space-x-2 items-center px-4 py-2">
         <div className="px-3 py-1 flex items-center justify-center font-medium text-lg text-center text-white rounded-lg bg-zinc-900">
           M
         </div>
@@ -27,8 +31,30 @@ const Sidebar = ({ open, setOpen }: SideBarProps) => {
           Mono<p className="font-normal text-zinc-700">Trix</p>
         </h3>
       </div>
+      <hr />
+      <div className='px-4 py-1 mt-5 space-y-1'>
+        <NavItems label='Dashboard' icon={LayoutDashboard} to="/" active={pathname === '/dashboard'}/>
+        <NavItems label='Profile' icon={CircleUserRound} to='/dashboard/profile' active={pathname === '/dashboard/profile'}/>
+        <NavItems label='Settings' icon={Settings} to='/dashboard/settings' active={pathname === '/dashboard/settings'}/>
+      </div>
     </aside>
     </>
+  )
+}
+
+
+const NavItems = ({ label, icon, to, alert, active }: { label: string; icon: React.ComponentType, to: string, alert?: boolean, active?: boolean }) => {
+  const Icon = icon;
+  return (
+    <Link href={to}>
+        <div className={cn('flex items-center space-x-2 hover:bg-muted rounded-md px-3 py-2 cursor-pointer', active && 'bg-muted')}>
+      <Icon size={18} />
+      <span className='text-sm font-medium'>{label}</span>
+      {alert && (
+        <span className='ml-auto flex h-2 w-2 rounded-full bg-red-500' />
+      )}
+    </div>
+    </Link>
   )
 }
 
