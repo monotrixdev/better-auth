@@ -51,7 +51,7 @@ const Sidebar = ({ open, setOpen, resize, setResize }: SideBarProps) => {
       </div>
       )}
       <div className='px-4 py-1 space-y-1 h-full'>
-        <NavItems resize={resize} label='Dashboard' icon={LayoutDashboard} to="/" active={pathname === '/dashboard'}/>
+        <NavItems resize={resize} label='Dashboard' icon={LayoutDashboard} to="/dashboard" active={pathname === '/dashboard'}/>
         <NavItems resize={resize} label='Profile' icon={CircleUserRound} to='/dashboard/profile' active={pathname === '/dashboard/profile'}/>
         {!resize && (
             <div className='mt-5'>

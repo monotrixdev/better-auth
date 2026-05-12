@@ -14,7 +14,7 @@ import { Look } from '@/lib/lookup'
 import DashboardList from '../_components/dashboard-list'
 
 const Dashboard = () => {
-  const {data: session} = authClient.useSession();
+  const {data: session, isPending} = authClient.useSession();
   const [trueLoading, setTrueLoading] = useState(false)
   const [lookuoNumber, setLookupNumber] = useState(""); 
 const [lookup, setLookup] = useState<any>({status: false, name: "", number: "", carrier: "", location: "", type: ""});
@@ -43,6 +43,15 @@ const handleSearch = async () => {
   }
 }
   return (
+    <>
+
+      {isPending && (
+            <div className='bg-zinc-50 w-full h-full flex items-center justify-center'>
+      <Spinner />
+    </div>
+      )}
+
+    {!isPending && (
     <section className='w-full bg-zinc-50 px-4 py-10'>
       <div className='container mx-auto h-full'>
         <div>
@@ -113,6 +122,8 @@ const handleSearch = async () => {
         </div>
       </div>
     </section>
+    )}
+    </>
   )
 }
 

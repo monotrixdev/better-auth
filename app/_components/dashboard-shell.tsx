@@ -9,9 +9,9 @@ const DashboardShell = ({
     children: React.ReactNode
 }) => {
     const [open, setOpen] = React.useState(false);
-      const [resize, setResize] = React.useState(false);
+    const [resize, setResize] = React.useState(false);
   return (
-<div className="flex h-screen overflow-hidden">
+<div className="flex h-screen w-screen overflow-hidden">
   <Sidebar
     open={open}
     setOpen={setOpen}
