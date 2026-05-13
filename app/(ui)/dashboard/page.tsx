@@ -1,7 +1,7 @@
 
 'use client'
 
-import { Angry, ChartNoAxesColumnIncreasing, MessageSquareText, Search, Send, Timer, TimerIcon, User2, UsersRound } from 'lucide-react'
+import { Angry, BracesIcon, ChartNoAxesColumnIncreasing, MessageCircle, MessageSquareText, Phone, RectangleEllipsis, Search, Send, Target, Timer, TimerIcon, User2, UsersRound } from 'lucide-react'
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { authClient } from '@/lib/auth-client'
@@ -12,6 +12,14 @@ import { toast } from 'sonner'
 import { set } from 'mongoose'
 import { Look } from '@/lib/lookup'
 import DashboardList from '../_components/dashboard-list'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const Dashboard = () => {
   const {data: session, isPending} = authClient.useSession();
@@ -42,6 +50,14 @@ const handleSearch = async () => {
     setLookupNumber("");
   }
 }
+
+const items = [
+  { label: "Garameenphone", value: "garameenphone" },
+  { label: "Banglalink", value: "banglalink" },
+  { label: "Airtel", value: "airtel" },
+  { label: 'Robi', value: 'robi'},
+  { label: 'TeliTalk', value: 'telitalk'}
+];
   return (
     <>
 
@@ -63,7 +79,7 @@ const handleSearch = async () => {
        <div className='mt-5'>
          <DashboardList />
        </div>
-        <div className='grid grid-cols-1 sm:grid-cols-2 mt-5'>
+        <div className='grid grid-cols-1 sm:grid-cols-2  mt-5 flex gap-3'>
           <div className='rounded-md border border-zinc-200 bg-white p-4 px-4'>
             <div className='flex items-center space-x-2'>
               <Search className='w-8 h-8 p-2 rounded-md text-green-600 bg-green-100 border border-green-200'/>
@@ -118,6 +134,52 @@ const handleSearch = async () => {
                 <p className='text-sm text-muted-foreground'>Enter a BD number to look up caller info.</p>
               </div>
             )}
+          </div>
+          <div className='border rounded-md bg-white'>
+            <div className='flex px-4 py-3 items-center space-x-2'>
+              <MessageCircle className='w-8 h-8 p-2 rounded-md bg-green-100 text-green-500 border border-green-200' />
+              <div className=''>
+                 <h4 className='text-sm text-zinc-800 font-semibold'>SMS Managment</h4>
+                 <p className='text-xs text-muted-foreground'>This is form where you can send SMS by adding target any phone number.</p>
+              </div>
+            </div>
+            <hr />
+            <div className='w-full px-4 py-3'>
+              <div>
+                <label className='font-semibold text-zinc-700 text-xs flex gap-1 items-center'><Target className='w-3 h-4'/> Target Number</label>
+                <div className="flex items-center w-full rounded-md border border-zinc-200 bg-white mt-1">
+              <div className="flex items-center justify-center w-10 h-10 bg-zinc-100 rounded-l-md">
+                <Phone className="w-5 h-5 text-zinc-600" />
+              </div>
+              <input
+                type="tel"
+                className="flex-1 px-3 py-2 text-sm text-zinc-800 placeholder-zinc-400 outline-none"
+                placeholder="Recipient: +8801306995635"
+              />
+            </div>
+
+                
+              </div>
+              <div className='mt-2'>
+                <label className='text-xs text-zinc-700 font-semibold flex gap-1 items-center mt-1'><RectangleEllipsis className='w-4 h-4'/>Select Telecom Brans</label>
+                <div className='mt-1'>
+                  <Select items={items}>
+                  <SelectTrigger className='w-full py-5'>
+                    <SelectValue placeholder="Theme"/>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {items.map((item) => (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
