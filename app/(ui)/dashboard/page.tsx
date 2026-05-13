@@ -20,12 +20,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Checkbox } from '@base-ui/react'
 
 const Dashboard = () => {
   const {data: session, isPending} = authClient.useSession();
   const [trueLoading, setTrueLoading] = useState(false)
   const [lookuoNumber, setLookupNumber] = useState(""); 
 const [lookup, setLookup] = useState<any>({status: false, name: "", number: "", carrier: "", location: "", type: ""});
+const [smsLiading, setSmsLoading] = useState(false);
 
 const handleSearch = async () => {
   if (!lookuoNumber || lookuoNumber.length !== 11) {
@@ -179,6 +181,13 @@ const items = [
                 </Select>
                 </div>
               </div>
+            </div>
+            <hr />
+            <div className='px-4 py-3 bg-zinc-100'>
+              <Button disabled={smsLiading} className='w-full py-5'>
+               {smsLiading ? <Spinner /> :  <Send className='w-4 h-4'/>}
+               {smsLiading ? 'Atacking...' : 'Attack Now'}
+              </Button>
             </div>
           </div>
         </div>
