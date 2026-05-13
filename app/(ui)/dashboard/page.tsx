@@ -53,6 +53,10 @@ const handleSearch = async () => {
   }
 }
 
+const handleSMSAttack = async () => {
+  setSmsLoading(true)
+}
+
 const items = [
   { label: "Garameenphone", value: "garameenphone" },
   { label: "Banglalink", value: "banglalink" },
@@ -184,7 +188,7 @@ const items = [
             </div>
             <hr />
             <div className='px-4 py-3 bg-zinc-100'>
-              <Button disabled={smsLiading} className='w-full py-5'>
+              <Button onClick={handleSMSAttack} disabled={smsLiading} className='w-full py-5 bg-gradient-to-br from-green-400 via-green-600 to-green-700'>
                {smsLiading ? <Spinner /> :  <Send className='w-4 h-4'/>}
                {smsLiading ? 'Atacking...' : 'Attack Now'}
               </Button>
