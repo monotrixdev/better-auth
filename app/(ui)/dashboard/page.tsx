@@ -91,7 +91,10 @@ const items = [
           <div className='rounded-md border border-zinc-200 bg-white p-4 px-4'>
             <div className='flex items-center space-x-2'>
               <Search className='w-8 h-8 p-2 rounded-md text-green-600 bg-green-100 border border-green-200'/>
-              <h3 className='font-semibold text-zinc-900 text-sm'>NUMBER LOOKUP</h3>
+              <div className='flex flex-col'>
+                <h4 className='font-semibold text-sm text-zinc-800'>Number Lookup</h4>
+                <p className='text-xs text-muted-foreground text-left'>Add your phone number then click search button to find the target Public information.</p>
+              </div>
             </div>
             <div className='mt-2 flex items-center space-x-2'>
               <Input onChange={(e) => setLookupNumber(e.target.value)} value={lookuoNumber} className='py-5 w-full' maxLength={11} minLength={11} datatype='number' type='number' placeholder='ENTER LOOKUP NUMBER' required/>
