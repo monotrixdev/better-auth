@@ -28,6 +28,8 @@ const Dashboard = () => {
   const [lookuoNumber, setLookupNumber] = useState(""); 
 const [lookup, setLookup] = useState<any>({status: false, name: "", number: "", carrier: "", location: "", type: ""});
 const [smsLiading, setSmsLoading] = useState(false);
+const [smsNumber , setSMSNumber] = useState('');
+const [smsTelecom, setSMSTelecom] = useState<string>('')
 
 const handleSearch = async () => {
   if (!lookuoNumber || lookuoNumber.length !== 11) {
@@ -158,6 +160,8 @@ const items = [
                 <Phone className="w-5 h-5 text-zinc-600" />
               </div>
               <input
+              value={smsNumber}
+              onChange={(e) => setSMSNumber(e.target.value)}
                 type="tel"
                 className="flex-1 px-3 py-2 text-sm text-zinc-800 placeholder-zinc-400 outline-none"
                 placeholder="Recipient: +8801306995635"
@@ -169,9 +173,9 @@ const items = [
               <div className='mt-2'>
                 <label className='text-xs text-zinc-700 font-semibold flex gap-1 items-center mt-1'><RectangleEllipsis className='w-4 h-4'/>Select Telecom Brans</label>
                 <div className='mt-1'>
-                  <Select items={items}>
+                  <Select value={smsTelecom} onValueChange={(val: any) => setSMSTelecom(val)} items={items}>
                   <SelectTrigger className='w-full py-5'>
-                    <SelectValue placeholder="Theme"/>
+                    <SelectValue placeholder="Select you phone SIM brand"/>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
