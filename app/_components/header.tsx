@@ -10,6 +10,7 @@ import AvaterMenu from './avater-menu';
 import { kAPIErrorHeaderSymbol } from 'better-auth';
 import { Belanosima } from 'next/font/google';
 import Spinner from './spinner';
+import Image from 'next/image';
 
 interface HeaderProps {
     open?: boolean;
@@ -26,12 +27,7 @@ interface HeaderProps {
     <header className="flex items-center justify-between bg-white border-b px-2 py-2">
       {!session?.user && (
       <div className="flex space-x-2 items-center">
-        <div className="px-3 py-1 flex items-center justify-center font-medium text-lg text-center text-white rounded-lg bg-zinc-900">
-          M
-        </div>
-        <h3 className="font-heading flex text-sm sm:text-md md:text-lg font-semibold bg-gradient-to-br from-zinc-500 via-zinc-600 to-zinc-100 bg-transparent bg-clip-text">
-          Mono<p className="font-normal text-zinc-700">Trix</p>
-        </h3>
+        <Image width={20} height={20} alt='Logo Monotrixdev' src='/logo.png'/>
       </div>
       )}
       {session?.user && (
