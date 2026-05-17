@@ -27,7 +27,7 @@ interface HeaderProps {
     <header className="flex items-center justify-between bg-white border-b px-2 py-2">
       {!session?.user && (
       <div className="flex space-x-2 items-center">
-        <Image width={20} height={20} alt='Logo Monotrixdev' src='/logo.png'/>
+        <Image width={40} height={40} alt="Logo Monotrixdev" src="/logo.png" />
       </div>
       )}
       {session?.user && (
