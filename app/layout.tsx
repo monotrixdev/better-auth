@@ -1,39 +1,109 @@
-import type { Metadata } from "next";
-import { DM_Sans, DM_Mono, Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import HeaderPage from "./_components/header";
-import FotterPage from "./_components/fotter";
+
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
+// Main Font
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const dmMono = DM_Mono({
-  variable: "--font-dm-mono",
+// Code Font
+const mono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: "400",
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Better Auth",
-  description: "Testing Better Auth deployment on Vercel.",
+  metadataBase: new URL("https://yourdomain.com"),
+
+  title: {
+    default: "Crock SMS Management",
+    template: "%s | Crock SMS",
+  },
+
+  description:
+    "Professional SMS management platform for messaging, spam detection, contact verification, and communication tools.",
+
+  keywords: [
+    "SMS",
+    "SMS Management",
+    "Bulk SMS",
+    "Spam Detection",
+    "Truecaller",
+    "Messaging Platform",
+    "SMS Service",
+    "Phone Verification",
+  ],
+
+  authors: [
+    {
+      name: "Crock Team",
+    },
+  ],
+
+  creator: "Crock Team",
+
+  openGraph: {
+    title: "Crock SMS Management",
+    description:
+      "Professional SMS management and spam detection platform.",
+    url: "https://yourdomain.com",
+    siteName: "Crock SMS",
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Crock SMS Management",
+    description:
+      "Professional SMS management and spam detection platform.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={cn("h-full", "antialiased", dmSans.variable, dmMono.variable, "font-sans", inter.variable)}>
-      <body className="flex flex-col">
-        <Toaster position="top-center"/>
-          {
-            children
-          }
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(
+        "h-full scroll-smooth",
+        outfit.variable,
+        mono.variable
+      )}
+    >
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased"
+        )}
+      >
+        <Toaster position="bottom-center" richColors />
+
+        {children}
       </body>
     </html>
   );

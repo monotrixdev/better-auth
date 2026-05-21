@@ -8,7 +8,6 @@ import HeaderPage from '@/app/_components/header'
 const PageLayout = () => {
   return (
     <main className='mx-auto bg-red-50'>
-        <HeaderPage />
         <HeroPage />
         <PricingPage />
         <FotterPage />
