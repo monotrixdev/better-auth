@@ -20,7 +20,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://better-auth-lac.vercel.app/"),
 
   title: {
     default: "Crock SMS Management",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Crock SMS Management",
     description:
       "Professional SMS management and spam detection platform.",
-    url: "https://yourdomain.com",
+    url: "https://better-auth-lac.vercel.app/",
     siteName: "Crock SMS",
     locale: "en_US",
     type: "website",
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
 };
 
